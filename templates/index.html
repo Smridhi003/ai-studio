@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smridhi · AI/NLP Studio</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────────────────── -->
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">
+        <span class="logo-hex">⬡</span>
+        <div>
+          <span class="logo-name">Smridhi</span>
+          <span class="logo-dot"> · </span>
+          <span class="logo-title">AI/NLP Studio</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <span class="branch-badge">CSE-IoT</span>
+        <button class="theme-btn" id="themeBtn" title="Toggle dark mode" aria-label="Toggle theme">🌙</button>
+      </div>
+    </div>
+    <div class="container">
+      <p class="header-sub">Combining <strong>NLP · ML · Deep Learning · IoT AI</strong> in one interactive platform</p>
+    </div>
+  </header>
+
+  <!-- ── Tab Nav ─────────────────────────────────────────────────── -->
+  <div class="tab-bar">
+    <div class="container">
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-tab="nlp">🔤 NLP</button>
+        <button class="tab" data-tab="sentiment">😊 Sentiment</button>
+        <button class="tab" data-tab="classify">🏷️ Classify</button>
+        <button class="tab" data-tab="generate">✨ Generate</button>
+        <button class="tab" data-tab="neural">🧠 Neural Net</button>
+        <button class="tab" data-tab="chat">💬 AI Chat</button>
+        <button class="tab" data-tab="about">👩‍💻 About</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Main ───────────────────────────────────────────────────── -->
+  <main class="container main">
+
+    <!-- NLP -->
+    <section id="panel-nlp" class="panel active">
+      <div class="panel-header">
+        <h2>Named Entity Recognition + Linguistic Analysis</h2>
+        <p>Tokenization, POS tagging, and NER to extract structured information — core NLP pipeline techniques.</p>
+      </div>
+      <div class="card">
+        <label class="label">Input text</label>
+        <textarea id="nlp-input" class="textarea" rows="4">Elon Musk founded SpaceX in 2002 in Hawthorne, California. Tesla reported $25 billion in revenue last quarter.</textarea>
+        <button class="btn" onclick="runNLP()">▶ Analyze text</button>
+      </div>
+      <div id="nlp-result" class="result hidden"></div>
+    </section>
+
+    <!-- Sentiment -->
+    <section id="panel-sentiment" class="panel">
+      <div class="panel-header">
+        <h2>Multi-dimensional Sentiment Analysis</h2>
+        <p>6-emotion detection, subjectivity scoring, and aspect-level sentiment using transformer classifiers.</p>
+      </div>
+      <div class="card">
+        <label class="label">Input text</label>
+        <textarea id="sent-input" class="textarea" rows="4">The product is absolutely brilliant but the delivery was frustratingly slow. Customer service was okay.</textarea>
+        <button class="btn" onclick="runSentiment()">▶ Analyze sentiment</button>
+      </div>
+      <div id="sent-result" class="result hidden"></div>
+    </section>
+
+    <!-- Classify -->
+    <section id="panel-classify" class="panel">
+      <div class="panel-header">
+        <h2>Zero-Shot Text Classification</h2>
+        <p>NLI-based ML classification into any labels — no task-specific training data needed.</p>
+      </div>
+      <div class="card">
+        <label class="label">Input text</label>
+        <textarea id="clf-input" class="textarea" rows="3">Scientists at MIT have developed a new battery technology that could triple the range of electric vehicles while reducing charging time to under 10 minutes.</textarea>
+        <label class="label" style="margin-top:12px">Labels (comma-separated)</label>
+        <input id="clf-labels" class="input" type="text" value="Technology, Science, Business, Politics, Sports, Health"/>
+        <button class="btn" onclick="runClassify()">▶ Classify</button>
+      </div>
+      <div id="clf-result" class="result hidden"></div>
+    </section>
+
+    <!-- Generate -->
+    <section id="panel-generate" class="panel">
+      <div class="panel-header">
+        <h2>Controlled Text Generation</h2>
+        <p>Autoregressive language modeling with style conditioning and nucleus sampling (top-p).</p>
+      </div>
+      <div class="card">
+        <label class="label">Topic or prompt</label>
+        <textarea id="gen-input" class="textarea" rows="2">quantum computing breakthroughs in 2024</textarea>
+        <div class="row-controls">
+          <div class="field-group">
+            <label class="label">Style</label>
+            <select id="gen-style" class="select">
+              <option value="news">News article</option>
+              <option value="tweet">Tweet thread</option>
+              <option value="summary">Executive summary</option>
+              <option value="eli5">Explain like I'm 5</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label class="label">Length</label>
+            <select id="gen-len" class="select">
+              <option value="short">Short</option>
+              <option value="medium" selected>Medium</option>
+              <option value="long">Long</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn" onclick="runGenerate()">✨ Generate</button>
+      </div>
+      <div id="gen-result" class="result hidden"></div>
+    </section>
+
+    <!-- Neural Net -->
+    <section id="panel-neural" class="panel">
+      <div class="panel-header">
+        <h2>Live Neural Network Visualizer</h2>
+        <p>A real 5→5→5→3 feedforward DNN (NumPy). Watch activations flow through ReLU, Sigmoid, and Softmax layers.</p>
+      </div>
+      <div class="card">
+        <label class="label">Input sentence</label>
+        <textarea id="nn-input" class="textarea" rows="2">This movie was absolutely fantastic!</textarea>
+        <button class="btn" onclick="runNeuralNet()">▶ Run forward pass</button>
+      </div>
+      <div id="nn-result" class="result hidden"></div>
+    </section>
+
+    <!-- Chat -->
+    <section id="panel-chat" class="panel">
+      <div class="panel-header">
+        <h2>AI Chat Assistant</h2>
+        <p>Ask me about any module, the techniques used, how to run the project, or IoT + AI concepts.</p>
+      </div>
+      <div class="chat-window" id="chatWindow">
+        <div class="chat-msg bot">
+          <div class="chat-avatar bot-av">S</div>
+          <div class="chat-bubble">Hey! 👋 I'm Smridhi's AI assistant. Ask me about NLP, sentiment analysis, the neural net, how to deploy this project, or anything else!</div>
+        </div>
+      </div>
+      <div class="chat-input-row">
+        <input id="chatInput" class="chat-input" type="text" placeholder="Ask me anything about this project…" onkeydown="if(event.key==='Enter') sendChat()"/>
+        <button class="chat-send-btn" onclick="sendChat()">Send ↗</button>
+      </div>
+      <div class="chat-suggestions">
+        <span class="suggestion" onclick="quickChat('What is NLP?')">What is NLP?</span>
+        <span class="suggestion" onclick="quickChat('How does the neural net work?')">How does the neural net work?</span>
+        <span class="suggestion" onclick="quickChat('How do I run this locally?')">How do I run this?</span>
+        <span class="suggestion" onclick="quickChat('How does IoT connect with AI?')">IoT + AI?</span>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="panel-about" class="panel">
+      <div class="about-hero">
+        <div class="about-avatar">S</div>
+        <div>
+          <h2 class="about-name">Smridhi</h2>
+          <p class="about-role">CSE-IoT Student · AI/ML Enthusiast</p>
+        </div>
+      </div>
+
+      <div class="about-bio card">
+        <p>
+          I'm a Computer Science (IoT) student exploring the intersection of
+          <strong>Artificial Intelligence</strong>, <strong>Machine Learning</strong>, and
+          <strong>Internet of Things</strong>. This studio is my hands-on project demonstrating
+          real NLP and DL pipelines — from named entity recognition to live neural network
+          forward passes — all built from scratch with Python.
+        </p>
+      </div>
+
+      <h3 class="section-heading">What this project demonstrates</h3>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <span class="skill-icon">🔤</span>
+          <div class="skill-name">NLP Pipeline</div>
+          <div class="skill-desc">Tokenization, POS tagging, NER with spaCy</div>
+        </div>
+        <div class="skill-card">
+          <span class="skill-icon">🤗</span>
+          <div class="skill-name">Transformers</div>
+          <div class="skill-desc">RoBERTa, BART-MNLI, GPT-2 via HuggingFace</div>
+        </div>
+        <div class="skill-card">
+          <span class="skill-icon">🧠</span>
+          <div class="skill-name">Deep Learning</div>
+          <div class="skill-desc">DNN forward pass built with NumPy</div>
+        </div>
+        <div class="skill-card">
+          <span class="skill-icon">🌐</span>
+          <div class="skill-name">REST APIs</div>
+          <div class="skill-desc">Flask backend with 6 ML API endpoints</div>
+        </div>
+        <div class="skill-card">
+          <span class="skill-icon">📡</span>
+          <div class="skill-name">CSE-IoT Focus</div>
+          <div class="skill-desc">AI on edge devices, sensor data NLP</div>
+        </div>
+        <div class="skill-card">
+          <span class="skill-icon">🚀</span>
+          <div class="skill-name">Full Stack</div>
+          <div class="skill-desc">Python backend + Vanilla JS frontend</div>
+        </div>
+      </div>
+
+      <h3 class="section-heading">Tech stack</h3>
+      <div class="tech-stack">
+        <span class="tech-tag">Python 3.11</span>
+        <span class="tech-tag">Flask 3</span>
+        <span class="tech-tag">spaCy</span>
+        <span class="tech-tag">HuggingFace Transformers</span>
+        <span class="tech-tag">NumPy</span>
+        <span class="tech-tag">GPT-2</span>
+        <span class="tech-tag">RoBERTa</span>
+        <span class="tech-tag">BART-MNLI</span>
+        <span class="tech-tag">Jupyter</span>
+        <span class="tech-tag">HTML/CSS/JS</span>
+      </div>
+
+      <h3 class="section-heading">Connect</h3>
+      <div class="connect-row">
+        <a class="connect-btn" href="https://github.com" target="_blank">⬡ GitHub</a>
+        <a class="connect-btn" href="https://linkedin.com" target="_blank">in LinkedIn</a>
+      </div>
+      <p style="font-size:12px;color:var(--muted);margin-top:8px">Update the links above with your real GitHub and LinkedIn URLs in <code>templates/index.html</code></p>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Built by <strong>Smridhi</strong> · CSE-IoT · AI/ML/DL/NLP Studio</p>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
