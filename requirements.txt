@@ -1,0 +1,25 @@
+# ── Core Web Framework ─────────────────────────────────────────
+flask>=3.0.0
+flask-cors>=4.0.0
+
+# ── NLP (spaCy) ────────────────────────────────────────────────
+# After installing, run: python -m spacy download en_core_web_sm
+spacy>=3.7.0
+
+# ── Deep Learning / Transformers (HuggingFace) ─────────────────
+# For full DL features. Remove if running in lightweight mode.
+transformers>=4.40.0
+torch>=2.2.0          # CPU-only: pip install torch --index-url https://download.pytorch.org/whl/cpu
+sentencepiece>=0.1.99
+accelerate>=0.29.0
+
+# ── Numerical Computing ─────────────────────────────────────────
+numpy>=1.26.0
+
+# ── Optional: Jupyter Notebooks ─────────────────────────────────
+jupyter>=1.0.0
+notebook>=7.0.0
+
+# ── Dev Tools ───────────────────────────────────────────────────
+python-dotenv>=1.0.0
+gunicorn>=21.2.0       # For production deployment
