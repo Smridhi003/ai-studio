@@ -125,8 +125,8 @@ CMD ["python", "app.py"]
 
 **Smridhi** — CSE-IoT Student | AI/ML Enthusiast
 
-- 🔗 [GitHub](https://github.com/YOUR_USERNAME)
-- 💼 [LinkedIn](https://linkedin.com/in/YOUR_PROFILE)
+- 🔗 [GitHub](https://github.com/Smridhi003)
+- 💼 [LinkedIn](https://www.linkedin.com/in/smridhi-ba7ba3373?utm_source=share_via&utm_content=profile&utm_medium=member_android)
 
 ---
 
