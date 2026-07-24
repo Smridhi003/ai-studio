@@ -29,7 +29,7 @@ chatbot           = Chatbot()
 
 
 @app.route("/")
-def index():
+def home():
     return render_template("index.html")
 
 
