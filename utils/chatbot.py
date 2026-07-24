@@ -13,12 +13,7 @@ import re
 import random
 from typing import List, Dict
 
-try:
-    from transformers import pipeline
-    _qa_pipe = pipeline("text2text-generation", model="google/flan-t5-small")
-    TRANSFORMERS_AVAILABLE = True
-except Exception:
-    TRANSFORMERS_AVAILABLE = False
+TRANSFORMERS_AVAILABLE = False
 
 
 # ── Knowledge base ─────────────────────────────────────────────────────────
